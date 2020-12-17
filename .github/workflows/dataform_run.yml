@@ -1,4 +1,4 @@
-name: CI
+name: DF-RUN
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  run:
+  compile:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code into workspace directory
