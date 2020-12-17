@@ -14,7 +14,7 @@ config {
 
 }
 
-selects
+select
   orders.order_date as date,
   customers.country_group as country_group,
   count(orders.order_key) as order_count,
