@@ -22,8 +22,10 @@ jobs:
         uses: docker://dataformco/dataform:1.6.11
         with:
           args: compile
-      - name: Compile Result
-        uses: actions/upload-artifact@v2
+      - uses: 8398a7/action-slack@v2
         with:
-          name: action log
-          path: output/test/compile_result.html
+          status: ${{ job.status }}
+          fields: repo,message,action,author
+        env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
