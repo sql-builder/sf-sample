@@ -14,19 +14,20 @@ jobs:
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v2
-      - name: Install project dependencies
+#       - name: Install project dependencies
+#         uses: docker://dataformco/dataform:1.6.11
+#         with:
+#           args: install
+      - name: Dataform Compile
         uses: docker://dataformco/dataform:1.6.11
-        with:
-          args: install
-      - name: dataform_compile
-        uses: docker://dataformco/dataform:1.6.11
+        id: dataform_compile
         with:
           args: compile
           
-      - name: action-slack
-        # You may pin to the exact commit or the version.
-        # uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
-        uses: 8398a7/action-slack@v3.8.2
+#       - name: action-slack
+#         # You may pin to the exact commit or the version.
+#         # uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
+#         uses: 8398a7/action-slack@v3.8.2
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
