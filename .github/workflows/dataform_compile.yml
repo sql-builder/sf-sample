@@ -41,7 +41,7 @@ jobs:
         uses: 8398a7/action-slack@v3.8.2 
         with:
           # Specify success or failure or cancelled or custom.
-          status: all
+          status: success,failure,cancelled
           # You can choose the items you want to add to the fields at the time of notification.
           #   If you have more than one, please enter it in csv format.
           #   e.g. commit,repo
