@@ -18,7 +18,7 @@ jobs:
         uses: docker://dataformco/dataform:1.6.11
         with:
           args: install
-      - name: Run dataform compile
+      - name: dataform_compile
         uses: docker://dataformco/dataform:1.6.11
         with:
           args: compile
@@ -27,52 +27,67 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
         uses: 8398a7/action-slack@v3.8.2
-        
-        with:
-          # Specify success or failure or cancelled or custom.
-          status: ${{ job.status }}
-          # You can choose the items you want to add to the fields at the time of notification.
-          #   If you have more than one, please enter it in csv format.
-          #   e.g. commit,repo
 
-          fields: all # optional, default is 
-          # json payload
-          # refs https://github.com/slackapi/node-slack-sdk/blob/v5.0.0/packages/webhook/src/IncomingWebhook.ts#L91-L106)
-
-          custom_payload: here # optional
-          # Specify channel or here or `user_id`.
-          # refs: https://api.slack.com/reference/surfaces/formatting#mentioning-users
-
-#           mention: # optional, default is 
-#           # Specify success or failure or cancelled or custom or always.
-#           # Multiple statuses can be specified in csv format.
-#           # e.g. success,failure
-
-#           if_mention: # optional, default is 
-#           # User name for slack notification.
-
-#           author_name: # optional, default is 8398a7@action-slack
-#           # You can overwrite text.
-
-#           text: # optional, default is 
-#           # override the legacy integration's default name.
-
-#           username: # optional, default is 
-#           # an emoji code string to use in place of the default icon.
-
-#           icon_emoji: # optional, default is 
-#           # an icon image URL string to use in place of the default icon.
-
-#           icon_url: # optional, default is 
-#           # override the legacy integration's default channel. This should be an ID, such as C8UJ12P4P.
-
-#           channel: # optional, default is 
-#           # Use this if you want to overwrite the job name.
-
-#           job_name: # optional, default is 
-#           # Use this if you wish to use a different GitHub token than the one provided by the workflow.
-
-#           github_token: # default is ${{ github.token }}
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+          SLACK_MESSAGE: ${{join(steps.dataform_compile.outputs.*, '\n')}}
+          SLACK_TITLE: Dataform Compile Log
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}   
+   
+   
+#         with:
+#           # Specify success or failure or cancelled or custom.
+#           status: ${{ job.status }}
+#           # You can choose the items you want to add to the fields at the time of notification.
+#           #   If you have more than one, please enter it in csv format.
+#           #   e.g. commit,repo
+#           steps:  Run dataform compile
+           
+#           fields: workflow,job,commit,repo,ref,author,took
+         
+#           custom_payload: |
+#             {
+#               username: 'action-slack',
+#               icon_emoji: ':octocat:',
+#               attachments: [{
+#                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+#                 text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}.\n ${steps.AS_`,
+#               }]
+#             }
+
+# #           mention: # optional, default is 
+# #           # Specify success or failure or cancelled or custom or always.
+# #           # Multiple statuses can be specified in csv format.
+# #           # e.g. success,failure
+
+# #           if_mention: # optional, default is 
+# #           # User name for slack notification.
+
+# #           author_name: # optional, default is 8398a7@action-slack
+# #           # You can overwrite text.
+
+# #           text: # optional, default is 
+# #           # override the legacy integration's default name.
+
+# #           username: # optional, default is 
+# #           # an emoji code string to use in place of the default icon.
+
+# #           icon_emoji: # optional, default is 
+# #           # an icon image URL string to use in place of the default icon.
+
+# #           icon_url: # optional, default is 
+# #           # override the legacy integration's default channel. This should be an ID, such as C8UJ12P4P.
+
+# #           channel: # optional, default is 
+# #           # Use this if you want to overwrite the job name.
+
+# #           job_name: # optional, default is 
+# #           # Use this if you wish to use a different GitHub token than the one provided by the workflow.
+
+# #           github_token: # default is ${{ github.token }}
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+#           MATRIX_CONTEXT: ${{ toJson(matrix) }} # required
+#         if: always() # Pick up events even if the job fails or is canceled.
+        
