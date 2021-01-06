@@ -12,8 +12,8 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code into workspace directory
-        uses: actions/checkout@v2
+#       - name: Checkout code into workspace directory
+#         uses: actions/checkout@v2
 #       - name: Install project dependencies
 #         uses: docker://dataformco/dataform:1.6.11
 #         with:
