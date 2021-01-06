@@ -1,9 +1,6 @@
 name: DF-RUN
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
