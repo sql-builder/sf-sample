@@ -20,9 +20,15 @@ npm install -g gpg
 
 npm install -g @dataform/cli
 
+# Check
 printf "Which dataform: " && which dataform
 
 printf "Dataform version: " &&  dataform --version
+
+printf "Which gpg: " && which gpg
+
+printf "Gpg version: " &&  gpg --version
+
 
 cd /home/shipyard/
 
