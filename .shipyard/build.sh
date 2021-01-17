@@ -17,7 +17,7 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 popd
 
 # npm install -g gpg
-sudo apt-get install -y gnupg
+apt-get install -y gnupg
 
 npm install -g @dataform/cli
 
