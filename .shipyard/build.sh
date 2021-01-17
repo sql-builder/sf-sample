@@ -37,8 +37,6 @@ cd /home/shipyard/
 # Running an init set of commands. 
 dataform install
 
-dataform compile
-
 dataform run --dry-run
 
 dataform test
