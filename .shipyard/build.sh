@@ -16,8 +16,6 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
-cd /home/shipyard/
-
 npm install -g gpg
 
 npm install -g @dataform/cli
@@ -31,9 +29,10 @@ printf "Which gpg: " && which gpg
 
 printf "Gpg version: " &&  gpg --version
 
-
 # Pulling gpg credentials 
 gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.json.gpg
+
+cd /home/shipyard/
 
 # Running an init set of commands. 
 dataform install
