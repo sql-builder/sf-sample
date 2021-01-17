@@ -16,7 +16,7 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
-npm install -g @gpg
+npm install -g gpg
 
 npm install -g @dataform/cli
 
