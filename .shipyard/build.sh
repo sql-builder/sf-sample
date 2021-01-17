@@ -16,8 +16,9 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
-# npm install -g gpg
-apt-get install -y gnupg
+cd /home/shipyard/
+
+npm install -g gpg
 
 npm install -g @dataform/cli
 
@@ -30,8 +31,6 @@ printf "Which gpg: " && which gpg
 
 printf "Gpg version: " &&  gpg --version
 
-
-cd /home/shipyard/
 
 # Pulling gpg credentials 
 gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.json.gpg
