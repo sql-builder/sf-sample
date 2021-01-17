@@ -16,11 +16,13 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
+npm install -g @gpg
+
 npm install -g @dataform/cli
 
-printf "which dataform: " && which dataform && printf "path.\n" 
+printf "Which dataform: " && which dataform
 
-printf "Dataform version: " &&  dataform --version && printf ".\n" 
+printf "Dataform version: " &&  dataform --version
 
 cd /home/shipyard/
 
