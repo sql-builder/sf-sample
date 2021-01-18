@@ -23,7 +23,7 @@ npm install -g @dataform/cli
 # Check
 printf "Which dataform: " && which dataform
 
-printf "Dataform version: " &&  dataform --version
+printf "Dataform version: " &&  dataform --version 
 
 printf "Which gpg: " && which gpg
 
@@ -32,11 +32,9 @@ printf "Gpg version: " &&  gpg --version
 # Pulling gpg credentials 
 gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.json.gpg
 
-cd /home/shipyard/
-
 # Running an init set of commands. 
 dataform install
 
-dataform run --dry-run
+dataform run --dry-run | tee -a /home/shipyard/run_logs/log.txt
 
-dataform test
+# dataform test
