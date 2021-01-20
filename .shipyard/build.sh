@@ -31,7 +31,7 @@ npm install -g @dataform/cli
 printf "Which dataform: " && which dataform
 
 # printf "Dataform version: " &&  dataform --version 
-echo 'Dataform Version: " >> log_${SHIPYARD_LOG_ID}.txt
+echo "Dataform Version: " >> log_${SHIPYARD_LOG_ID}.txt
 dataform --version >> log_${SHIPYARD_LOG_ID}.txt
 
 # Pulling gpg credentials 
