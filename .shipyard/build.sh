@@ -3,9 +3,9 @@
 set -e
 
 echo "Starting new Fleet Run: " >> log_${SHIPYARD_LOG_ID}.txt
-${SHIPYARD_FLEET_ID} >> log_${SHIPYARD_LOG_ID}.txt
+echo ${SHIPYARD_FLEET_ID} >> log_${SHIPYARD_LOG_ID}.txt
 echo "Starting new Fleet Run: " >> log_${SHIPYARD_LOG_ID}.txt
-${SHIPYARD_VESSEL_ID} >> log_${SHIPYARD_LOG_ID}.txt
+echo ${SHIPYARD_VESSEL_ID} >> log_${SHIPYARD_LOG_ID}.txt
 echo "\n" >> log_${SHIPYARD_LOG_ID}.txt
 
 TAR_DIR="node-${NODE_VERSION}-linux-x64"
