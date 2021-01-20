@@ -24,7 +24,7 @@ printf "Which dataform: " && which dataform
 printf "Dataform version: " &&  dataform --version 
 
 # Pulling gpg credentials 
-gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.json.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.gpg
 
 # Running an init set of commands. 
 dataform install
