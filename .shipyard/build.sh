@@ -2,6 +2,10 @@
 
 set -e
 
+echo "Starting new Fleet Run: " && ${SHIPYARD_FLEET_ID}  >> log_${SHIPYARD_LOG_ID}.txt
+echo "Starting new Vessel Run: " && ${SHIPYARD_VESSEL_ID} >> log_${SHIPYARD_LOG_ID}.txt
+echo "\n" >> log_${SHIPYARD_LOG_ID}.txt
+
 TAR_DIR="node-${NODE_VERSION}-linux-x64"
 TAR_NAME="${TAR_DIR}.tar.gz"
 
@@ -16,19 +20,26 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
+echo "Using Node Version: " &&  ${NODE_VERSION} >> log_${SHIPYARD_LOG_ID}.txt
+
 npm install -g @dataform/cli
 
 # Check
 printf "Which dataform: " && which dataform
 
-printf "Dataform version: " &&  dataform --version 
+# printf "Dataform version: " &&  dataform --version 
+echo "Dataform Version: " &&  dataform --version >> log_${SHIPYARD_LOG_ID}.txt
 
 # Pulling gpg credentials 
-gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  /home/shipyard/df-credentials.json /home/shipyard/.df-credentials.gpg
+printf "PWD: " && pwd
+
+gpg --quiet --batch --yes --decrypt --passphrase="${CREDENTIALS_GPG_PASSPHRASE}" --output  .df-credentials.json .df-credentials.gpg
+
 
 # Running an init set of commands. 
 dataform install
 
-dataform run --dry-run | tee -a /home/shipyard/run_logs/log.txt
+echo "Starting Dataform Run...\n" >> log_${SHIPYARD_LOG_ID}.txt
+dataform run --dry-run >> log_${SHIPYARD_LOG_ID}.txt
 
 # dataform test
