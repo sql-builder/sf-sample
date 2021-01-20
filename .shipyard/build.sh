@@ -22,7 +22,8 @@ ln -f -s "${HOME}/${TAR_DIR}" "${HOME}/.local/node"
 
 popd
 
-echo "Using Node Version: " &&  ${NODE_VERSION} >> log_${SHIPYARD_LOG_ID}.txt
+echo "Using Node Version: " >> log_${SHIPYARD_LOG_ID}.txt 
+echo ${NODE_VERSION} >> log_${SHIPYARD_LOG_ID}.txt
 
 npm install -g @dataform/cli
 
