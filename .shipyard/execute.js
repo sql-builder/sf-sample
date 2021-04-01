@@ -2,7 +2,7 @@ var fs = require('fs');
 var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
-cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json .df-credentials.json.gpg;
+cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json .df-credentials.gpg;
 dataform install;
 dataform run --dry-run;`
 
