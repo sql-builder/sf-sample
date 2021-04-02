@@ -3,19 +3,19 @@ var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
 // Get tag list for run if available
-const getJsonFile = (filePath, encoding = 'utf8') => (
-//    new Promise((resolve, reject) => {
-   (resolve, reject) => {
-      fs.readFile(filePath, encoding, (err, contents) => {
-          if(err) {
-             return reject(err);
-          }
-          resolve(contents);
-      });
-   })
-     .then(JSON.parse)
-);
-const data = getJsonFile('./environments.json');
+// const getJsonFile = (filePath, encoding = 'utf8') => (
+// //    new Promise((resolve, reject) => {
+//    (resolve, reject) => {
+//       fs.readFile(filePath, encoding, (err, contents) => {
+//           if(err) {
+//              return reject(err);
+//           }
+//           resolve(contents);
+//       });
+//    })
+//      .then(JSON.parse)
+// );
+// const data = getJsonFile('./environments.json');
 
 // function jsonParser(stringValue) {
 
@@ -26,8 +26,8 @@ const data = getJsonFile('./environments.json');
 // const keyFilter = (key) => (item) => (item.key === key);
 // const tagList = data.find(keyFilter('tags'));
 // var obj = JSON.parse(data);
-
-var tags = data.tags;
+var obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
+var tags = obj.tags;
 // var tagList = jsonParser('tags');
 
 
