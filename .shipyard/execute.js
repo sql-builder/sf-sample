@@ -4,7 +4,8 @@ var logName = process.env.LOG_NAME
 
 // Get tag list for run if available
 const getJsonFile = (filePath, encoding = 'utf8') => (
-   new Promise((resolve, reject) => {
+//    new Promise((resolve, reject) => {
+   (resolve, reject) => {
       fs.readFile(filePath, encoding, (err, contents) => {
           if(err) {
              return reject(err);
