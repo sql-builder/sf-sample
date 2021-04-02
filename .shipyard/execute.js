@@ -5,8 +5,8 @@ var logName = process.env.LOG_NAME
 const obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
 const TAGS = obj.environment.tags
 
-console.log('Loading environment ' + obj.environment.name + ' with schedule of ' + obj.environment.schedule + '.');
-console.log('If set, running tags: ' + obj.environment.tags + '.');
+console.log('Loading environment "' + obj.environment.name + '" with schedule of "' + obj.environment.schedule + '".');
+console.log('If set, running tags: "' + obj.environment.tags + '".');
 console.log(`Running command: dataform run --json --tags ${TAGS};`);
 
 // var a = 'route 3';
