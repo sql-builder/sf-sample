@@ -2,8 +2,20 @@ var fs = require('fs');
 var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
+const getJsonFile = (filePath, encoding = 'utf8') => (
+   new Promise((resolve, reject) => {
+      fs.readFile(filePath, encoding, (err, contents) => {
+          if(err) {
+             return reject(err);
+          }
+          resolve(contents);
+      });
+   })
+     .then(JSON.parse)
+);
+
 // Get tag list for run if available
-const data = await getJsonFile('./environments.json');
+const data = getJsonFile('./environments.json');
 const keyFilter = (key) => (item) => (item.key === key);
 const tagList = data.find(keyFilter('tags');
 
