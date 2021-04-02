@@ -6,7 +6,7 @@ var logName = process.env.LOG_NAME
 var obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
 var TAGS = obj.tags;
 
-var config = require('./environments.json');
+var config = require('environments.json');
 console.log(config + '. tags:' + config.environments.schedules.tags);
 
 console.log(`json_file: ${obj}`);
