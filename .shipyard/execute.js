@@ -2,9 +2,14 @@ var fs = require('fs');
 var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
+// Get tag list for run if available
+const data = await getJsonFile('./environments.json');
+const keyFilter = (key) => (item) => (item.key === key);
+const tagList = data.find(keyFilter('tags');
+
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
-dataform run --json ${tag_list};`
+dataform run --json ${tagList};`
 
 exec(cmd, {cwd: process.env.PROJECT_LOCATION, env: {'PROJECT_LOCATION': process.env.PROJECT_LOCATION, 'CREDENTIALS_GPG_PASSPHRASE': process.env.CREDENTIALS_GPG_PASSPHRASE, 'PATH': process.env.PATH}}, (error, stdout, stderr) => {
     if (error) {
