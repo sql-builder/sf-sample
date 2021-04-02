@@ -24,9 +24,9 @@ const data = getJsonFile('./environments.json');
 // };
 // const keyFilter = (key) => (item) => (item.key === key);
 // const tagList = data.find(keyFilter('tags'));
-var obj = JSON.parse(data);
+// var obj = JSON.parse(data);
 
-var tags = obj.tags;
+var tags = data.tags;
 // var tagList = jsonParser('tags');
 
 
