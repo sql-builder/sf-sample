@@ -16,21 +16,23 @@ const getJsonFile = (filePath, encoding = 'utf8') => (
 );
 const data = getJsonFile('./environments.json');
 
-function jsonParser(stringValue) {
+// function jsonParser(stringValue) {
 
- var string = JSON.stringify(stringValue);
- var objectValue = JSON.parse(string);
- return objectValue[stringValue];
-};
+//  var string = JSON.stringify(stringValue);
+//  var objectValue = JSON.parse(string);
+//  return objectValue[stringValue];
+// };
 // const keyFilter = (key) => (item) => (item.key === key);
 // const tagList = data.find(keyFilter('tags'));
+var obj = JSON.parse(data);
 
-var tagList = jsonParser('tags');
+var tags = obj.tags;
+// var tagList = jsonParser('tags');
 
 
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
-dataform run --json ${tagList};`
+dataform run --json ${tags};`
 
 exec(cmd, {cwd: process.env.PROJECT_LOCATION, env: {'PROJECT_LOCATION': process.env.PROJECT_LOCATION, 'CREDENTIALS_GPG_PASSPHRASE': process.env.CREDENTIALS_GPG_PASSPHRASE, 'PATH': process.env.PATH}}, (error, stdout, stderr) => {
     if (error) {
