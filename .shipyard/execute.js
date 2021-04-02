@@ -6,9 +6,13 @@ var logName = process.env.LOG_NAME
 var obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
 var TAGS = obj.tags;
 
+console.log(`TAGS: ${TAGS}`);
+
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
 dataform run --json $TAGS;`
+
+console.log(`cmd: ${cmd}`);
 
 exec(cmd, {cwd: process.env.PROJECT_LOCATION, env: {'PROJECT_LOCATION': process.env.PROJECT_LOCATION, 'CREDENTIALS_GPG_PASSPHRASE': process.env.CREDENTIALS_GPG_PASSPHRASE, 'PATH': process.env.PATH}}, (error, stdout, stderr) => {
     if (error) {
