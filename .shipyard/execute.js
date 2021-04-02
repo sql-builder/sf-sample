@@ -2,6 +2,7 @@ var fs = require('fs');
 var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
+// Get tag list for run if available
 const getJsonFile = (filePath, encoding = 'utf8') => (
    new Promise((resolve, reject) => {
       fs.readFile(filePath, encoding, (err, contents) => {
@@ -13,11 +14,19 @@ const getJsonFile = (filePath, encoding = 'utf8') => (
    })
      .then(JSON.parse)
 );
-
-// Get tag list for run if available
 const data = getJsonFile('./environments.json');
-const keyFilter = (key) => (item) => (item.key === key);
-const tagList = data.find(keyFilter('tags'));
+
+function jsonParser(stringValue) {
+
+ var string = JSON.stringify(stringValue);
+ var objectValue = JSON.parse(string);
+ return objectValue[stringValue];
+};
+// const keyFilter = (key) => (item) => (item.key === key);
+// const tagList = data.find(keyFilter('tags'));
+
+var tagList = jsonParser('tags');
+
 
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
