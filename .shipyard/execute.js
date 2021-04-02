@@ -7,6 +7,7 @@ const TAGS = obj.environment.tags
 
 console.log('Loading environment ' + obj.environment.name + ' with schedule of ' + obj.environment.schedule + '.');
 console.log('If set, running tags: ' + obj.environment.tags + '.');
+console.log(`Running command: dataform run --json --tags ${TAGS};`);
 
 // var a = 'route 3';
 // if(a === 'route 1' || a === 'route 2'){
@@ -28,8 +29,6 @@ console.log('If set, running tags: ' + obj.environment.tags + '.');
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
 dataform run --json --tags ${TAGS};`
-
-console.log(`Running command: dataform run --json ${TAGS};`);
 
 exec(cmd, {cwd: process.env.PROJECT_LOCATION, env: {'PROJECT_LOCATION': process.env.PROJECT_LOCATION, 'CREDENTIALS_GPG_PASSPHRASE': process.env.CREDENTIALS_GPG_PASSPHRASE, 'PATH': process.env.PATH}}, (error, stdout, stderr) => {
     if (error) {
