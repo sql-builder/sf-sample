@@ -3,6 +3,6 @@
     {
         "name": "production",
         "schedule": "daily", 
-        "tags": ["daily"] 
+        "tags": ["test","marketing","staging"] 
     }
 }
