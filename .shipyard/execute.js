@@ -4,7 +4,7 @@ var logName = process.env.LOG_NAME
 
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
-dataform run --dry-run --json;`
+dataform run --dry-run --json; >> log_run_json.txt`
 
 exec(cmd, {cwd: process.env.PROJECT_LOCATION, env: {'PROJECT_LOCATION': process.env.PROJECT_LOCATION, 'CREDENTIALS_GPG_PASSPHRASE': process.env.CREDENTIALS_GPG_PASSPHRASE, 'PATH': process.env.PATH}}, (error, stdout, stderr) => {
     if (error) {
