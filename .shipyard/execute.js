@@ -2,14 +2,23 @@ var fs = require('fs');
 var exec = require("child_process").exec;
 var logName = process.env.LOG_NAME
 
+const obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
+// const json = '{"result":true, "environments":{"count":42}}';
+// const obj = JSON.parse(json);
 
-var obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
-var TAGS = JSON.parse(obj.environments.schedules).tags;
+console.log(obj.environments);
+// expected output: 42
 
-console.log(obj + ': tags:' + TAGS);
+console.log(obj.environments.schedules);
 
-console.log(`json_file: ${obj}`);
-console.log(`TAGS: ${TAGS}`);
+
+// var obj = JSON.parse(fs.readFileSync('./environments.json', 'utf8'));
+// var TAGS = JSON.parse(obj.environments.schedules).tags;
+
+// console.log(obj + ': tags:' + TAGS);
+
+// console.log(`json_file: ${obj}`);
+// console.log(`TAGS: ${TAGS}`);
 
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
