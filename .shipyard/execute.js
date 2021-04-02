@@ -17,7 +17,7 @@ const getJsonFile = (filePath, encoding = 'utf8') => (
 // Get tag list for run if available
 const data = getJsonFile('./environments.json');
 const keyFilter = (key) => (item) => (item.key === key);
-const tagList = data.find(keyFilter('tags');
+const tagList = data.find(keyFilter('tags'));
 
 cmd = `gpg --quiet --batch --yes --decrypt --passphrase=$CREDENTIALS_GPG_PASSPHRASE --output  .df-credentials.json df-credentials.gpg;
 dataform install;
