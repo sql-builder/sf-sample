@@ -1,21 +1,10 @@
 {
-  "environment": [
-    {
-      "name": "production",
-      "configOverride": {
-        "defaultDatabase": "production"
-      },
-      "schedules": [
+    "environments": [
         {
-          "name": "daily",
-          "tags": ["daily"]
-        },
-        {
-          "name": "hourly",
-          "tags": ["reporting"]
+            "name": "production",
+            "configOverride": {},
+            "gitRef": "master",
+            "schedules": { "name": "daily", "tags": ["daily"] },
         }
-      ],
-      "gitRef": "master"
-    }
-  ]
+    ]
 }
